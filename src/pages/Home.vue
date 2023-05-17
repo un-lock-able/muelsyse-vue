@@ -24,4 +24,8 @@
     transform: scale(1.1);
     cursor: pointer;
 }
+
+body {
+    margin: 0;
+}
 </style>

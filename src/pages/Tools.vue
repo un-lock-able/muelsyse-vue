@@ -5,23 +5,23 @@ export default {
       toolWebsites: [
         {
           siteName: "明日方舟wiki——Bilibili游戏wiki",
-          siteUrl: "https://wiki.biligame.com/arknights/",
+          siteUrl: "https://wiki.biligame.com/arknights",
         },
         {
           siteName: "公招工具——Bilibili游戏wiki",
-          siteUrl: "https://wiki.biligame.com/arknights/%E5%85%AC%E5%BC%80%E6%8B%9B%E5%8B%9F%E5%B7%A5%E5%85%B7/",
+          siteUrl: "https://wiki.biligame.com/arknights/%E5%85%AC%E5%BC%80%E6%8B%9B%E5%8B%9F%E5%B7%A5%E5%85%B7",
         },
         {
           siteName: "企鹅物流数据统计",
-          siteUrl: "https://penguin-stats.io/",
+          siteUrl: "https://penguin-stats.io",
         },
         {
           siteName: "Arknights Wiki - fandom",
-          siteUrl: "https://arknights.fandom.com/"
+          siteUrl: "https://arknights.fandom.com"
         },
         {
           siteName: "PRTS Wiki",
-          siteUrl: "https://prts.wiki/"
+          siteUrl: "https://prts.wiki"
         }
       ]
     }

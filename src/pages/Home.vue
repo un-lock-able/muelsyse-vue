@@ -28,13 +28,13 @@ export default {
 <template>
     <img class="background-img" :src="backgroundImgUrl">
     <div class="pic-container">
-        <img class="muelsyse-pic" :class="{ 'elite1-pic': this.elite1 }"
+        <img class="muelsyse-pic" :class="{ 'elite1-pic': elite1 }"
             :src="muelsysePicUrl" draggable="false" alt="这是缪尔赛思。她很可爱，请给她钱。"
-            title="这是缪尔赛思。她很可爱，请给她钱。" @click="this.$router.push('/tools')">
+            title="这是缪尔赛思。她很可爱，请给她钱。" @click="$router.push('/tools')">
     </div>
     <div class="elite-switch-buttons">
-        <button @click="this.elite1 = true" :class="{ selected: this.elite1 }">精英零</button>
-        <button @click="this.elite1 = false" :class="{ selected: !this.elite1 }">精英二</button>
+        <button @click="elite1 = true" :class="{ selected: elite1 }">精英零</button>
+        <button @click="elite1 = false" :class="{ selected: !elite1 }">精英二</button>
     </div>
 </template>
 

@@ -1,3 +1,9 @@
+<script setup>
+import backgroundImgUrl from "../assets/bg/Bg_rhine.png"
+import muelsyseElite1Url from "../assets/muelsyse.png";
+import muelsyseElite2Url from "../assets/muelsyse_2.png";
+</script>
+
 <script>
 export default {
     data() {
@@ -10,15 +16,21 @@ export default {
     },
     unmounted() {
         document.body.classList.remove('body-no-margin')
+    },
+    computed: {
+        muelsysePicUrl() {
+            return this.elite1 ? muelsyseElite1Url : muelsyseElite2Url;
+        }
     }
 }
 </script>
 
 <template>
-    <img class="background-img" src="/src/assets/bg/Bg_rhine.png">
+    <img class="background-img" :src="backgroundImgUrl">
     <div class="pic-container">
-        <img class="muelsyse-pic" :class="{'elite1-pic': this.elite1}" :src="this.elite1 ? '/src/assets/muelsyse.png' : '/src/assets/muelsyse_2.png'"
-            draggable="false" alt="这是缪尔赛思。她很可爱，请给她钱。" title="这是缪尔赛思。她很可爱，请给她钱。" @click="this.$router.push('/tools')">
+        <img class="muelsyse-pic" :class="{ 'elite1-pic': this.elite1 }"
+            :src="muelsysePicUrl" draggable="false" alt="这是缪尔赛思。她很可爱，请给她钱。"
+            title="这是缪尔赛思。她很可爱，请给她钱。" @click="this.$router.push('/tools')">
     </div>
     <div class="elite-switch-buttons">
         <button @click="this.elite1 = true" :class="{ selected: this.elite1 }">精英零</button>
@@ -27,12 +39,6 @@ export default {
 </template>
 
 <style scoped>
-/* .bg-container {
-    position: absolute;
-    z-index: -1;
-    height: 100vh;
-    width: 100vw;
-} */
 .background-img {
     position: absolute;
     z-index: -1;
@@ -88,7 +94,7 @@ export default {
     color: rgb(26, 194, 253);
 }
 
-button.selected{
-    color: rgb(26,194,253);
+button.selected {
+    color: rgb(26, 194, 253);
 }
 </style>

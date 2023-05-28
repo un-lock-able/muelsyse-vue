@@ -64,7 +64,6 @@ h1 {
 }
 
 .link-cards button:hover {
-  box-shadow: 0px 8px 20px #F596AA;
-  cursor: pointer;
+  box-shadow: 0px 8px 20px #F596AA
 }
 </style>

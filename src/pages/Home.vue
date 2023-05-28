@@ -1,15 +1,44 @@
+<script>
+export default {
+    data() {
+        return {
+            elite1: true,
+        }
+    },
+    mounted() {
+        document.body.classList.add('body-no-margin')
+    },
+    unmounted() {
+        document.body.classList.remove('body-no-margin')
+    }
+}
+</script>
+
 <template>
+    <img class="background-img" src="/src/assets/bg/Bg_rhine.png">
     <div class="pic-container">
-        <img class="muelsyse-pic" src="../assets/muelsyse.png" draggable="false" alt="这是缪尔赛思。她很可爱，请给她钱。"
-            title="这是缪尔赛思。她很可爱，请给她钱。" @click="this.$router.push('/tools')">
+        <img class="muelsyse-pic" :class="{'elite1-pic': this.elite1}" :src="this.elite1 ? '/src/assets/muelsyse.png' : '/src/assets/muelsyse_2.png'"
+            draggable="false" alt="这是缪尔赛思。她很可爱，请给她钱。" title="这是缪尔赛思。她很可爱，请给她钱。" @click="this.$router.push('/tools')">
+    </div>
+    <div class="elite-switch-buttons">
+        <button @click="this.elite1 = true" :class="{ selected: this.elite1 }">精英零</button>
+        <button @click="this.elite1 = false" :class="{ selected: !this.elite1 }">精英二</button>
     </div>
 </template>
 
 <style scoped>
-.muelsyse-pic {
-    max-height: 90vh;
-    max-width: 90vw;
-    transition-duration: 0.5s;
+/* .bg-container {
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+} */
+.background-img {
+    position: absolute;
+    z-index: -1;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
 }
 
 .pic-container {
@@ -18,14 +47,48 @@
     align-items: center;
     height: 100vh;
     user-select: none;
+    overflow: hidden;
+}
+
+.muelsyse-pic {
+    max-height: 100vh;
+    max-width: 100vw;
+    transition-duration: 0.5s;
 }
 
 .muelsyse-pic:hover {
-    transform: scale(1.1);
+    --translate-distance: 0;
+    transform: scale(1.2) translateY(var(--translate-distance));
     cursor: pointer;
 }
 
-body {
-    margin: 0;
+.muelsyse-pic.elite1-pic:hover {
+    --translate-distance: 5vh;
+}
+
+.elite-switch-buttons {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 10px;
+}
+
+.elite-switch-buttons button {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    margin: 5px;
+    font-size: large;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 2px;
+    padding: 0.5ex 1em;
+    transition: 0.2s
+}
+
+.elite-switch-buttons button:hover {
+    color: rgb(26, 194, 253);
+}
+
+button.selected{
+    color: rgb(26,194,253);
 }
 </style>

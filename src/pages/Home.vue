@@ -29,8 +29,8 @@ export default {
     <img class="background-img" :src="backgroundImgUrl">
     <div class="pic-container">
         <img class="muelsyse-pic" :class="{ 'elite1-pic': elite1 }"
-            :src="muelsysePicUrl" draggable="false" alt="这是缪尔赛思。她很可爱，请给她钱。"
-            title="这是缪尔赛思。她很可爱，请给她钱。" @click="$router.push('/tools')">
+            :src="muelsysePicUrl" draggable="false" alt="这是缪缪。她很可爱，请给她钱。"
+            title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')">
     </div>
     <div class="elite-switch-buttons">
         <button @click="elite1 = true" :class="{ selected: elite1 }">精英零</button>

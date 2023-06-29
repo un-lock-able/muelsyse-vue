@@ -8,7 +8,7 @@ import muelsyseElite2Url from "../assets/muelsyse_2.png";
 export default {
     data() {
         return {
-            elite1: true,
+            imgName: 1,
         }
     },
     mounted() {
@@ -17,24 +17,20 @@ export default {
     unmounted() {
         document.body.classList.remove('body-no-margin')
     },
-    computed: {
-        muelsysePicUrl() {
-            return this.elite1 ? muelsyseElite1Url : muelsyseElite2Url;
-        }
-    }
 }
 </script>
 
 <template>
     <img class="background-img" :src="backgroundImgUrl">
     <div class="pic-container">
-        <img class="muelsyse-pic" :class="{ 'elite1-pic': elite1 }"
-            :src="muelsysePicUrl" draggable="false" alt="这是缪缪。她很可爱，请给她钱。"
-            title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')">
+        <img class="muelsyse-pic elite1-pic" :src="muelsyseElite1Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。"
+            title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')" :hidden="imgName != 1">
+        <img class="muelsyse-pic" :src="muelsyseElite2Url" draggable="false" alt="这是精二缪缪。她很可爱，请给他钱。"
+            title="这是精二缪缪。她很可爱，请给他钱。" @click="$router.push('/tools')" :hidden="imgName != 2">
     </div>
     <div class="elite-switch-buttons">
-        <button @click="elite1 = true" :class="{ selected: elite1 }">精英零</button>
-        <button @click="elite1 = false" :class="{ selected: !elite1 }">精英二</button>
+        <button @click="imgName = 1" :class="{ selected: imgName == 1 }">精英零</button>
+        <button @click="imgName = 2" :class="{ selected: imgName == 2 }">精英二</button>
     </div>
 </template>
 

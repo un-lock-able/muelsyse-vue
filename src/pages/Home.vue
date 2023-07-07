@@ -1,7 +1,8 @@
 <script setup>
 import backgroundImgUrl from "../assets/bg/Bg_rhine.png"
-import muelsyseElite1Url from "../assets/muelsyse.png";
-import muelsyseElite2Url from "../assets/muelsyse_2.png";
+import muelsyseElite1Url from "../assets/muelsyse_elites/muelsyse.png";
+import muelsyseElite2Url from "../assets/muelsyse_elites/muelsyse_2.png";
+import muelsyseElite3Url from "../assets/muelsyse_elites/muelsyse_3.png";
 </script>
 
 <script>
@@ -27,10 +28,13 @@ export default {
             title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')" :hidden="imgName != 1">
         <img class="muelsyse-pic" :src="muelsyseElite2Url" draggable="false" alt="这是精二缪缪。她很可爱，请给他钱。"
             title="这是精二缪缪。她很可爱，请给他钱。" @click="$router.push('/tools')" :hidden="imgName != 2">
+        <img class="muelsyse-pic" :src="muelsyseElite3Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。" title="这是缪缪。她很可爱，请给她钱。"
+            @click="$router.push('/tools')" :hidden="imgName != 3">
     </div>
     <div class="elite-switch-buttons">
         <button @click="imgName = 1" :class="{ selected: imgName == 1 }">精英零</button>
         <button @click="imgName = 2" :class="{ selected: imgName == 2 }">精英二</button>
+        <button @click="imgName = 3" :class="{ selected: imgName == 3 }">精英三（？）</button>
     </div>
 </template>
 

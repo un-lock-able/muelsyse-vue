@@ -22,7 +22,7 @@ export default {
 </script>
 
 <template>
-    <img class="background-img" :src="backgroundImgUrl">
+    <img class="background-img" :src="backgroundImgUrl" draggable="false" oncontextmenu="return false">
     <div class="pic-container">
         <img class="muelsyse-pic elite1-pic" :src="muelsyseElite1Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。"
             title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')" :hidden="imgName != 1">
@@ -45,6 +45,7 @@ export default {
     height: 100vh;
     width: 100vw;
     object-fit: cover;
+    user-select: "none"
 }
 
 .pic-container {

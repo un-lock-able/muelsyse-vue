@@ -18,7 +18,7 @@ export default {
     },
     unmounted() {
         document.body.classList.remove('body-no-margin');
-        document.body.removeEventListener('mousemove');
+        document.body.removeEventListener('mousemove', this.onMouseMove);
     },
     methods: {
         onMouseMove(event) {
@@ -70,7 +70,7 @@ export default {
     transition-duration: 0.5s;
 }
 
-.muelsyse-pic:hover {
+/* .muelsyse-pic:hover {
     --translate-distance: 0;
     transform: scale(1.2) translateY(var(--translate-distance));
     cursor: pointer;
@@ -78,7 +78,7 @@ export default {
 
 .muelsyse-pic.elite1-pic:hover {
     --translate-distance: 5vh;
-}
+} */
 
 .elite-switch-buttons {
     position: absolute;

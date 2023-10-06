@@ -13,11 +13,18 @@ export default {
         }
     },
     mounted() {
-        document.body.classList.add('body-no-margin')
+        document.body.classList.add('body-no-margin');
+        document.body.addEventListener('mousemove', this.onMouseMove);
     },
     unmounted() {
-        document.body.classList.remove('body-no-margin')
+        document.body.classList.remove('body-no-margin');
+        document.body.removeEventListener('mousemove');
     },
+    methods: {
+        onMouseMove(event) {
+            console.log("Moved!", event.clientX, event.clientY);
+        }
+    }
 }
 </script>
 

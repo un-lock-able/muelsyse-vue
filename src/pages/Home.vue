@@ -13,7 +13,6 @@ export default {
             screenWidth: 0,
             screenHeight: 0,
             bgImgInstance: null,
-            muelsysePicContainer: null,
         }
     },
     mounted() {
@@ -24,7 +23,6 @@ export default {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
         this.bgImgInstance = document.getElementById('background-img');
-        this.muelsysePicContainer = document.getElementById('muelsyse-container');
     },
     unmounted() {
         document.body.classList.remove('body-no-margin');
@@ -38,7 +36,7 @@ export default {
             let centerY = this.screenHeight / 2;
             let diffX = centerX - event.clientX;
             let diffY = centerY - event.clientY;
-            this.bgImgInstance.style.filter = `blur(${(diffX ** 2 + diffY ** 2) / (centerX ** 2 + centerY ** 2) * 2}px)`;
+            this.bgImgInstance.style.filter = `blur(${(1 - (diffX ** 2 + diffY ** 2) / (centerX ** 2 + centerY ** 2)) * 2}px)`;
         },
         onWindowResize(event) {
             this.screenHeight = window.innerHeight;
@@ -52,20 +50,24 @@ export default {
 </script>
 
 <template>
-    <img class="background-img" :src="backgroundImgUrl" draggable="false" oncontextmenu="return false">
+    <img class="background-img" :src="backgroundImgUrl" draggable="false" oncontextmenu="return false" id="background-img">
 
     <div class="pic-container">
         <img class="muelsyse-pic elite1-pic" :src="muelsyseElite1Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。"
-            title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')" :hidden="imgName != 1">
+            title="这是缪缪。她很可爱，请给她钱。" :hidden="imgName != 1">
         <img class="muelsyse-pic" :src="muelsyseElite2Url" draggable="false" alt="这是精二缪缪。她很可爱，请给他钱。"
-            title="这是精二缪缪。她很可爱，请给他钱。" @click="$router.push('/tools')" :hidden="imgName != 2">
+            title="这是精二缪缪。她很可爱，请给他钱。" :hidden="imgName != 2">
         <img class="muelsyse-pic" :src="muelsyseElite3Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。" title="这是缪缪。她很可爱，请给她钱。"
-            @click="$router.push('/tools')" :hidden="imgName != 3">
+            :hidden="imgName != 3">
     </div>
-    <div class="elite-switch-buttons">
+    <div class="elite-switch-buttons header-buttons">
         <button @click="imgName = 1" :class="{ selected: imgName == 1 }">精英零</button>
         <button @click="imgName = 2" :class="{ selected: imgName == 2 }">精英二</button>
         <button @click="imgName = 3" :class="{ selected: imgName == 3 }">精英三（？）</button>
+
+    </div>
+    <div class="tools-buttons header-buttons">
+        <button @click="$router.push('/tools')">小工具</button>
     </div>
 </template>
 
@@ -101,7 +103,14 @@ export default {
     margin: 10px;
 }
 
-.elite-switch-buttons button {
+.tools-buttons {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px;
+}
+
+.header-buttons button {
     background-color: rgba(0, 0, 0, 0.6);
     color: white;
     margin: 5px;
@@ -112,11 +121,11 @@ export default {
     transition: 0.2s
 }
 
-.elite-switch-buttons button:hover {
+.header-buttons button:hover {
     color: rgb(26, 194, 253);
 }
 
-button.selected {
+.header-buttons button.selected {
     color: rgb(26, 194, 253);
 }
 </style>

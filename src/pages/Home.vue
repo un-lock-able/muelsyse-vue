@@ -20,6 +20,7 @@ export default {
         document.body.classList.add('body-no-margin');
         document.body.addEventListener('mousemove', this.onMouseMove);
         window.addEventListener('resize', this.onWindowResize);
+        document.body.addEventListener('mouseleave', this.onLeaveWindow);
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
         this.bgImgInstance = document.getElementById('background-img');
@@ -28,30 +29,32 @@ export default {
     unmounted() {
         document.body.classList.remove('body-no-margin');
         document.body.removeEventListener('mousemove', this.onMouseMove);
+        document.body.removeEventListener('mouseleave', this.onLeaveWindow);
         window.removeEventListener('resize', this.onWindowResize);
     },
     methods: {
         onMouseMove(event) {
-            // console.log("Moved!", event.clientX, event.clientY);
             let centerX = this.screenWidth / 2;
             let centerY = this.screenHeight / 2;
             let diffX = centerX - event.clientX;
             let diffY = centerY - event.clientY;
-            this.bgImgInstance.style.transform = `translate(${diffX / centerX * 2}%, ${diffY / centerY * 2}%)`;
-            this.bgImgInstance.style.filter = `blur(${(diffX ** 2 + diffY ** 2) / (centerX ** 2 + centerY ** 2) * 1.5}px)`;
-            this.muelsysePicContainer.style.transform = `translate(${- diffX / centerX * 1}%, ${- diffY / centerY * 2}%)`
+            this.bgImgInstance.style.filter = `blur(${(diffX ** 2 + diffY ** 2) / (centerX ** 2 + centerY ** 2) * 2}px)`;
         },
         onWindowResize(event) {
             this.screenHeight = window.innerHeight;
             this.screenWidth = window.innerWidth;
+        },
+        onLeaveWindow(event) {
+            this.bgImgInstance.style.filter = `blur(0)`;
         }
     }
 }
 </script>
 
 <template>
-    <img class="background-img" :src="backgroundImgUrl" draggable="false" oncontextmenu="return false" id="background-img">
-    <div class="pic-container" id="muelsyse-container">
+    <img class="background-img" :src="backgroundImgUrl" draggable="false" oncontextmenu="return false">
+
+    <div class="pic-container">
         <img class="muelsyse-pic elite1-pic" :src="muelsyseElite1Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。"
             title="这是缪缪。她很可爱，请给她钱。" @click="$router.push('/tools')" :hidden="imgName != 1">
         <img class="muelsyse-pic" :src="muelsyseElite2Url" draggable="false" alt="这是精二缪缪。她很可爱，请给他钱。"
@@ -70,13 +73,10 @@ export default {
 .background-img {
     position: absolute;
     z-index: -1;
-    height: 100vh;
     width: 100vw;
+    height: 100vh;
     object-fit: cover;
-    user-select: "none";
-    scale: 108%;
     transition-duration: 100ms;
-    transform: translate(0%, 0%);
 }
 
 .pic-container {
@@ -91,18 +91,8 @@ export default {
 .muelsyse-pic {
     max-height: 100vh;
     max-width: 100vw;
-    transition-duration: 0.5s;
+    transition-duration: 1s;
 }
-
-/* .muelsyse-pic:hover {
-    --translate-distance: 0;
-    transform: scale(1.2) translateY(var(--translate-distance));
-    cursor: pointer;
-}
-
-.muelsyse-pic.elite1-pic:hover {
-    --translate-distance: 5vh;
-} */
 
 .elite-switch-buttons {
     position: absolute;

@@ -106,6 +106,10 @@ export default {
     width: 100vw;
 }
 
+.header-buttons {
+    margin: 10px;
+}
+
 .header-buttons button {
     background-color: rgba(0, 0, 0, 0.6);
     color: white;

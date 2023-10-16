@@ -50,6 +50,17 @@ export default {
 </script>
 
 <template>
+    <nav class="nav-bar">
+        <div class="header-buttons">
+            <button @click="imgName = 1" :class="{ selected: imgName == 1 }">精英零</button>
+            <button @click="imgName = 2" :class="{ selected: imgName == 2 }">精英二</button>
+            <button @click="imgName = 3" :class="{ selected: imgName == 3 }">精英三（？）</button>
+
+        </div>
+        <div class="header-buttons">
+            <button @click="$router.push('/tools')">小工具</button>
+        </div>
+    </nav>
     <img class="background-img" :src="backgroundImgUrl" draggable="false" oncontextmenu="return false" id="background-img">
 
     <div class="pic-container">
@@ -59,15 +70,6 @@ export default {
             title="这是精二缪缪。她很可爱，请给他钱。" :hidden="imgName != 2">
         <img class="muelsyse-pic" :src="muelsyseElite3Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。" title="这是缪缪。她很可爱，请给她钱。"
             :hidden="imgName != 3">
-    </div>
-    <div class="elite-switch-buttons header-buttons">
-        <button @click="imgName = 1" :class="{ selected: imgName == 1 }">精英零</button>
-        <button @click="imgName = 2" :class="{ selected: imgName == 2 }">精英二</button>
-        <button @click="imgName = 3" :class="{ selected: imgName == 3 }">精英三（？）</button>
-
-    </div>
-    <div class="tools-buttons header-buttons">
-        <button @click="$router.push('/tools')">小工具</button>
     </div>
 </template>
 
@@ -96,18 +98,12 @@ export default {
     transition-duration: 1s;
 }
 
-.elite-switch-buttons {
+.nav-bar {
     position: absolute;
-    left: 0;
-    top: 0;
-    margin: 10px;
-}
-
-.tools-buttons {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100vw;
 }
 
 .header-buttons button {
@@ -118,7 +114,8 @@ export default {
     border: 1px solid rgb(211, 211, 211);
     border-radius: 2px;
     padding: 0.5ex 1em;
-    transition: 0.2s
+    transition: 0.2s;
+    white-space: nowrap;
 }
 
 .header-buttons button:hover {

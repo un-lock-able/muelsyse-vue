@@ -28,7 +28,7 @@ export default {
         this.bgImgInstance = document.getElementById('background-img');
 
         this.updateCount();
-        // this.fetchTimer = setInterval(this.updateCount, 1000);
+        this.fetchTimer = setInterval(this.updateCount, 1000);
     },
     unmounted() {
         document.body.classList.remove('body-no-margin');
@@ -36,7 +36,7 @@ export default {
         document.body.removeEventListener('mouseleave', this.onLeaveWindow);
         window.removeEventListener('resize', this.onWindowResize);
 
-        // clearInterval(this.fetchTimer);
+        clearInterval(this.fetchTimer);
     },
     methods: {
         onMouseMove(event) {
@@ -51,13 +51,13 @@ export default {
         },
         async onJoinMumuButton(event) {
             this.hasJoined = true;
-            const result = await fetch("https://www.muelsyse.com/api/join");
+            const result = await fetch("/api/join");
             let parsed = await result.json();
             console.log(parsed, parsed.count);
             this.joinedCount = parsed.count;
         },
         async updateCount() {
-            const result = await fetch("https://www.muelsyse.com/api/count");
+            const result = await fetch("/api/count");
             let parsed = await result.json();
             this.joinedCount = parsed.count;
         }
@@ -88,9 +88,10 @@ export default {
             :hidden="imgName != 3">
     </div>
 
-    <div>
-        <button @click="onJoinMumuButton">{{ hasJoined ? "欢迎加入！" : "加入缪门！" }}</button>
-        <div>已有{{ joinedCount }}人次加入！</div>
+    <div class="join-container">
+        <div class="prompt">加入缪门！</div>
+        <div class="statistics">已有{{ joinedCount }}人次加入</div>
+        <button @click="onJoinMumuButton" :disabled="hasJoined">{{ hasJoined ? "缪门！" : "我要加入！" }}</button>
     </div>
 </template>
 
@@ -149,5 +150,47 @@ export default {
 
 .header-buttons button.selected {
     color: rgb(26, 194, 253);
+}
+
+.join-container {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    bottom: 0;
+    color: white
+}
+
+.join-container .prompt {
+    font-size: xx-large;
+    margin-top: 20px;
+}
+
+.join-container .statistics {
+    font-size: small;
+    margin-bottom: 40px;
+}
+
+.join-container button {
+    margin-bottom: 60px;
+    background-color: rgb(219, 222, 162);
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 2px;
+    font-size: large;
+    box-shadow: 0px 0px 3px rgb(150, 150, 150);
+}
+
+.join-container button:active {
+    box-shadow: 0px 0px 1px rgb(150, 150, 150);
+}
+
+.join-container button:disabled {
+    color: black;
+}
+
+.join-container button:hover:disabled {
+    cursor: default;
 }
 </style>

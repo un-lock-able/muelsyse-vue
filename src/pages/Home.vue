@@ -13,6 +13,9 @@ export default {
             screenWidth: 0,
             screenHeight: 0,
             bgImgInstance: null,
+            joinedCount: 0,
+            fetchTimer: null,
+            hasJoined: false,
         }
     },
     mounted() {
@@ -23,20 +26,21 @@ export default {
         this.screenHeight = window.innerHeight;
         this.screenWidth = window.innerWidth;
         this.bgImgInstance = document.getElementById('background-img');
+
+        this.updateCount();
+        // this.fetchTimer = setInterval(this.updateCount, 1000);
     },
     unmounted() {
         document.body.classList.remove('body-no-margin');
         document.body.removeEventListener('mousemove', this.onMouseMove);
         document.body.removeEventListener('mouseleave', this.onLeaveWindow);
         window.removeEventListener('resize', this.onWindowResize);
+
+        // clearInterval(this.fetchTimer);
     },
     methods: {
         onMouseMove(event) {
-            let centerX = this.screenWidth / 2;
-            let centerY = this.screenHeight / 2;
-            let diffX = centerX - event.clientX;
-            let diffY = centerY - event.clientY;
-            this.bgImgInstance.style.filter = `blur(${(1 - (diffX ** 2 + diffY ** 2) / (centerX ** 2 + centerY ** 2)) * 2}px)`;
+            this.bgImgInstance.style.filter = `blur(${(event.clientY / this.screenHeight) * 2}px)`;
         },
         onWindowResize(event) {
             this.screenHeight = window.innerHeight;
@@ -44,6 +48,18 @@ export default {
         },
         onLeaveWindow(event) {
             this.bgImgInstance.style.filter = `blur(0)`;
+        },
+        async onJoinMumuButton(event) {
+            this.hasJoined = true;
+            const result = await fetch("https://www.muelsyse.com/api/join");
+            let parsed = await result.json();
+            console.log(parsed, parsed.count);
+            this.joinedCount = parsed.count;
+        },
+        async updateCount() {
+            const result = await fetch("https://www.muelsyse.com/api/count");
+            let parsed = await result.json();
+            this.joinedCount = parsed.count;
         }
     }
 }
@@ -70,6 +86,11 @@ export default {
             title="这是精二缪缪。她很可爱，请给他钱。" :hidden="imgName != 2">
         <img class="muelsyse-pic" :src="muelsyseElite3Url" draggable="false" alt="这是缪缪。她很可爱，请给她钱。" title="这是缪缪。她很可爱，请给她钱。"
             :hidden="imgName != 3">
+    </div>
+
+    <div>
+        <button @click="onJoinMumuButton">{{ hasJoined ? "欢迎加入！" : "加入缪门！" }}</button>
+        <div>已有{{ joinedCount }}人次加入！</div>
     </div>
 </template>
 
